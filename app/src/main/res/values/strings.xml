@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PQC Checker</string>
+    <string name="nav_footer_text">Proudly presented by Yubico AB</string>
+    <string name="nav_footer_url">https://yubi.co/dev</string>
+
+    <string name="nav_apk_checker_title">Check installed apps</string>
+    <string name="nav_pki_check_title">Check available encryption algorithms</string>
+    <string name="nav_update_title">Check for new updates</string>
+</resources>
