@@ -1,5 +1,3 @@
-import java.util.Properties
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -24,7 +22,7 @@ android {
     buildTypes {
         release {
             optimization {
-                enable = true
+                enable = false
                 signingConfig = null
 
                 packageScope = setOf("androidx.**", "kotlin.**", "kotlinx.**")
@@ -40,24 +38,6 @@ android {
     buildFeatures {
         compose = true
     }
-}
-
-tasks.register<Exec>("signPqcRelease") {
-    description = "Sign release APKs with PQC"
-    dependsOn("assembleRelease")
-
-    val unsignedApk = layout.buildDirectory.file("outputs/apk/release/app-release-unsigned.apk").get().asFile
-    val keystore = file("keystore.jks")
-
-    commandLine(
-        "apksigner", "sign",
-        "--ks", keystore.absolutePath, "--ks-key-alias", "release",
-        "--hybrid-signer-role", "classical",
-        "--next-signer",
-        "--ks", keystore.absolutePath, "--ks-key-alias", "release_pqc",
-        "--hybrid-signer-role", "pqc",
-        unsignedApk.absolutePath
-    )
 }
 
 dependencies {

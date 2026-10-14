@@ -1,10 +1,10 @@
 [versions]
-agp = "9.8.1"
+agp = "9.5.0-alpha07"
 coreKtx = "1.19.1"
 lifecycleRuntimeKtx = "2.11.0"
 activityCompose = "1.13.0"
-kotlin = "2.2.10"
-composeBom = "2026.02.01"
+kotlin = "2.4.21"
+composeBom = "2026.09.00"
 accompanist = "0.37.3"
 
 [libraries]
@@ -23,4 +23,3 @@ accompanist-drawablepainter = { group = "com.google.accompanist", name = "accomp
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-
