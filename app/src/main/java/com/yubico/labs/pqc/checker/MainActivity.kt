@@ -1,10 +1,12 @@
 package com.yubico.labs.pqc.checker
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
@@ -21,9 +23,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.net.toUri
 import com.yubico.labs.pqc.checker.ui.ApkCheckerView
 import com.yubico.labs.pqc.checker.ui.ApkCheckerViewModel
 import com.yubico.labs.pqc.checker.ui.PkiCheckerView
@@ -133,6 +137,39 @@ fun PqcTopBar(
                     } else {
                         MaterialTheme.colorScheme.onPrimary
                     }
+                )
+            }
+            val context = LocalContext.current
+            IconButton(
+                onClick = {
+                    context.startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            "https://demo.yubico.com/webauthn-developers".toUri()
+                        )
+                    )
+                }
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_webauthn),
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+            IconButton(
+                onClick = {
+                    context.startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            "https://radar.cloudflare.com/post-quantum?host=google.com%3A443#browser-support".toUri()
+                        )
+                    )
+                }
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_tls),
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
         }
