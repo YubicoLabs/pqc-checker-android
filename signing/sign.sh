@@ -14,7 +14,7 @@ if command -v apksigner > /dev/null; then
   APK_SIGNER="apksigner"
 else
   echo "apksigner not on path, trying ANDROID_HOME (${ANDROID_HOME})"
-  APK_SIGNER="$ANDROID_HOME/build-tools/36.0.0/apksigner"
+  APK_SIGNER="$ANDROID_HOME/build-tools/37.0.0/apksigner"
 fi
 
 $APK_SIGNER sign \

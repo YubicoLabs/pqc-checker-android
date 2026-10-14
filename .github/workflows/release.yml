@@ -22,8 +22,8 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      - name: Install Android Build Tools 36.0.0
-        run: echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "build-tools;36.0.0"
+      - name: Install Android Build Tools
+        run: echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "build-tools;37.0.0"
 
       - name: Build Unsigned Release APK
         run: ./gradlew assembleRelease
