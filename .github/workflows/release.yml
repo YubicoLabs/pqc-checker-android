@@ -25,39 +25,17 @@ jobs:
       - name: Install Android Build Tools 36.0.0
         run: echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "build-tools;36.0.0"
 
-      - name: Decode Keystore
-        env:
-          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
-        run: |
-          echo "$KEYSTORE_BASE64" | base64 --decode > my-keystore.jks
-
       - name: Build Unsigned Release APK
         run: ./gradlew assembleRelease
 
       - name: Sign APK with PQC Hybrid Scheme
         env:
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          CLASSICAL_ALIAS: ${{ secrets.CLASSICAL_KEY_ALIAS }}
-          PQC_ALIAS: ${{ secrets.PQC_KEY_ALIAS }}
-        run: |
-          APKSIGNER="$ANDROID_HOME/build-tools/36.0.0/apksigner"
-          UNSIGNED_APK="app/build/outputs/apk/release/app-release-unsigned.apk"
-          SIGNED_APK="app-release-signed.apk"
-          
-          $APKSIGNER sign \
-            --out $SIGNED_APK \
-            --ks my-keystore.jks --ks-pass env:KEYSTORE_PASSWORD \
-            --ks-key-alias $CLASSICAL_ALIAS \
-            --hybrid-signer-role classical \
-            --next-signer \
-            --ks my-keystore.jks --ks-pass env:KEYSTORE_PASSWORD \
-            --ks-key-alias $PQC_ALIAS \
-            --hybrid-signer-role pqc \
-            $UNSIGNED_APK
+          PQC_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        run: signing/sign.sh
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: app-release-signed.apk
+          files: app-release.apk
           generate_release_notes: true
 
