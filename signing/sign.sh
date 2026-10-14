@@ -10,8 +10,14 @@
 #   * see app-release.apk in root.
 #
 
+if command -v apksigner > /dev/null; then
+  APK_SIGNER="apksigner"
+else
+  echo "apksigner not on path, trying ANDROID_HOME (${ANDROID_HOME})"
+  APK_SIGNER="$ANDROID_HOME/build-tools/36.0.0/apksigner"
+fi
 
-apksigner sign \
+$APK_SIGNER sign \
     --ks signing/standalone.jks \
     --ks-pass env:PQC_KEYSTORE_PASSWORD \
     --next-signer \
