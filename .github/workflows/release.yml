@@ -18,7 +18,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
-          java-version: '24' # Required for ML-DSA-65 support
+          java-version: '26'
           distribution: 'temurin'
           cache: gradle
 

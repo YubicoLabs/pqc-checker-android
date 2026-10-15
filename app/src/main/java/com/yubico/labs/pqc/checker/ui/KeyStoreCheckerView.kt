@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,18 +26,18 @@ import com.yubico.labs.pqc.checker.R
 
 @Composable
 @Preview
-private fun PkiCheckerPreviewView() {
-    PkiCheckerView(
+private fun KeyStoreCheckerPreviewView() {
+    KeyStoreCheckerView(
         innerPadding = PaddingValues(4.dp),
         status = "Previewing",
     ) {}
 }
 
 @Composable
-fun PkiCheckerView(
+fun KeyStoreCheckerView(
     innerPadding: PaddingValues,
     status: String,
-    onCheckPki: (toSign: String) -> Unit,
+    onCheck: (toSign: String) -> Unit,
 ) {
     val toSign = "Hello World!"
 
@@ -51,9 +52,9 @@ fun PkiCheckerView(
                     modifier = Modifier
                         .size(130.dp)
                         .clickable {
-                            onCheckPki(toSign)
+                            onCheck(toSign)
                         },
-                    painter = painterResource(R.drawable.ic_pki),
+                    painter = painterResource(R.drawable.ic_key_store),
                     contentDescription = null,
                     colorFilter = ColorFilter.tint(
                         MaterialTheme.colorScheme.primary
@@ -66,9 +67,9 @@ fun PkiCheckerView(
             Button(
                 modifier = Modifier
                     .padding(4.dp),
-                onClick = { onCheckPki(toSign) }
+                onClick = { onCheck(toSign) }
             ) {
-                Text("Check PQC PKI")
+                Text(stringResource(R.string.nav_check_keystore_title))
             }
         }
 

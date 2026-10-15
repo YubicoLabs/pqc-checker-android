@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
@@ -30,19 +29,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.net.toUri
 import com.yubico.labs.pqc.checker.ui.ApkCheckerView
 import com.yubico.labs.pqc.checker.ui.ApkCheckerViewModel
-import com.yubico.labs.pqc.checker.ui.PkiCheckerView
-import com.yubico.labs.pqc.checker.ui.PkiCheckerViewModel
+import com.yubico.labs.pqc.checker.ui.KeyStoreCheckerView
+import com.yubico.labs.pqc.checker.ui.KeyStoreCheckerViewModel
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-    private val pkiVm: PkiCheckerViewModel by viewModels()
+    private val keystoreVm: KeyStoreCheckerViewModel by viewModels()
     private val apkVm: ApkCheckerViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val pkiStatus by pkiVm.status.collectAsState()
+            val keystoreStatus by keystoreVm.status.collectAsState()
 
             val apkIsScanning by apkVm.isScanning.collectAsState()
             val apkStatus by apkVm.status.collectAsState()
@@ -63,11 +62,11 @@ class MainActivity : ComponentActivity() {
                         state = pagerState,
                     ) { page ->
                         when (page) {
-                            0 -> PkiCheckerView(
+                            0 -> KeyStoreCheckerView(
                                 innerPadding = innerPadding,
-                                status = pkiStatus,
-                                onCheckPki = { toSign ->
-                                    pkiVm.checkPqc(toSign)
+                                status = keystoreStatus,
+                                onCheck = { toSign ->
+                                    keystoreVm.checkPqc(toSign)
                                 },
                             )
 
@@ -113,13 +112,9 @@ fun PqcTopBar(
                 }
             ) {
                 Icon(
-                    painter = painterResource(R.drawable.ic_pki),
+                    painter = painterResource(R.drawable.ic_key_store),
                     contentDescription = null,
-                    tint = if (pagerState.currentPage == 0) {
-                        MaterialTheme.colorScheme.primary
-                    } else {
-                        MaterialTheme.colorScheme.onPrimary
-                    }
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
             IconButton(
@@ -132,11 +127,7 @@ fun PqcTopBar(
                 Icon(
                     painter = painterResource(R.drawable.ic_apk),
                     contentDescription = null,
-                    tint = if (pagerState.currentPage == 1) {
-                        MaterialTheme.colorScheme.primary
-                    } else {
-                        MaterialTheme.colorScheme.onPrimary
-                    }
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
             val context = LocalContext.current

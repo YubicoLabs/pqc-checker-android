@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import java.security.KeyPairGenerator
 import java.security.Signature
 
-class PkiCheckerViewModel : ViewModel() {
+class KeyStoreCheckerViewModel : ViewModel() {
     private val _status = MutableStateFlow("")
     val status: StateFlow<String> = _status
 

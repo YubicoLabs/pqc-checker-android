@@ -1,3 +1,4 @@
+[![Build and Release PQC Signed APK](https://github.com/YubicoLabs/pqc-checker-android/actions/workflows/release.yml/badge.svg)](https://github.com/YubicoLabs/pqc-checker-android/actions/workflows/release.yml)
 Post Quantum Cryptography Checker
 =================================
 
@@ -7,7 +8,7 @@ This app offers 4 modes: native public key infrastructure, application signature
 
 <table>
   <tr>
-    <td><img width="200" src="screenshots/pki.png"/></td>
+    <td><img width="200" src="screenshots/store.png"/></td>
     <td><img width="200" src="screenshots/apk.png"/></td>
     <td><img width="200" src="screenshots/web.png"/></td>
     <td><img width="200" src="screenshots/tls.png"/></td>
