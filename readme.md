@@ -27,7 +27,7 @@ Huge thanks to https://gist.github.com/cillyvms/3fe52113d68e049b48394d1c757ec535
 @mariobodemann gave a 15 minute presentation about this repository and his findings. For transparency there are two editions of the slide deck
 
 * [goole themed slide deck](slides.google.pdf) - These are the slides reworked by the google marketing team
-* [original slide deck](slides.orginal.pdf) - These are the slides as handed in by @mariobodemann, not containing Google's changes.
+* [original slide deck](slides.original.pdf) - These are the slides as handed in by @mariobodemann, not containing Google's changes.
 
 # Thanks
 
